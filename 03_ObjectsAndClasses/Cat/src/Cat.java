@@ -4,27 +4,40 @@ public class Cat
     private double originWeight;
     private double weight;
 
+    private String colorOfCat;
+    private String name;
+
     private double minWeight;
     private double maxWeight;
 
-    private String colorOfCat;
-
-    public Cat()
+    public Cat(double weight, String name, String colorOfCat)
     {
-        weight = 1500.0 + 3000.0 * Math.random();
+        this.weight = weight;
         originWeight = weight;
-        minWeight = 1000.0;
-        maxWeight = 9000.0;
-
+        this.colorOfCat = colorOfCat;
+        this.name = name;
     }
-    public void setColorOfCat(ColorOfCat color)
+    private static Cat copyCat(Cat cat)
     {
+        Cat newCat = new Cat(cat.getWeight(), cat.getColorOfCat(), cat.getName());
+        return newCat;
+    }
+
+
+    public void setColorOfCat(String colorOfCat) {
         this.colorOfCat = colorOfCat;
     }
 
-    public String getColorOfCat()
-    {
+    public String getColorOfCat() {
         return colorOfCat;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public void meow()
