@@ -1,15 +1,14 @@
 
 public class Cat
 {
-    private static final int QUANTITY_OF_EYES = 2;
-    private static final int MIN_WEIGHT = 1500;
-    private static final int MAX_WEIGHT = 15000;
-
     private double originWeight;
     private double weight;
 
     private double minWeight;
     private double maxWeight;
+
+    private double weightCat;
+
 
     public Cat()
     {
@@ -17,7 +16,14 @@ public class Cat
         originWeight = weight;
         minWeight = 1000.0;
         maxWeight = 9000.0;
-
+    }
+    public Cat(Double weightCat)
+    {
+        this.weightCat = weightCat;
+    }
+    public Double getWeightCat()
+    {
+        return weightCat;
     }
 
     public void meow()
