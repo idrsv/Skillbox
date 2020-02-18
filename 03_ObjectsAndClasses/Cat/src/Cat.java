@@ -1,15 +1,15 @@
+
 public class Cat
 {
-    public static int catCount;
+    private static final int QUANTITY_OF_EYES = 2;
+    private static final int MIN_WEIGHT = 1500;
+    private static final int MAX_WEIGHT = 15000;
 
     private double originWeight;
     private double weight;
 
     private double minWeight;
     private double maxWeight;
-
-    private String name;
-
 
     public Cat()
     {
@@ -20,35 +20,11 @@ public class Cat
 
     }
 
-    public Cat(String name)
-    {
-        this();
-        this.name = name;
-
-        if (weight >= maxWeight)
-            catCount = catCount - 1;
-        else if (weight <= minWeight)
-            catCount = catCount - 1;
-        else catCount = catCount + 1;
-    }
-
-    public String getName()
-    {
-        return name;
-    }
-
-    public int getCount()
-    {
-        return catCount;
-    }
-
-
     public void meow()
     {
         weight = weight - 1;
         System.out.println("Meow");
     }
-
 
     public void feed(Double amount)
     {
@@ -59,7 +35,6 @@ public class Cat
     {
         weight = weight + amount;
     }
-
 
     public Double getWeight()
     {
