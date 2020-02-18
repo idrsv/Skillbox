@@ -90,4 +90,63 @@ public class RoadController
     {
         System.out.println("Проезд невозможен: " + reason);
     }
+
+    public Double getPassengerCarMaxWeight()
+    {
+        return passengerCarMaxWeight;
+    }
+
+    public void setPassengerCarMaxWeight(Double passengerCarMaxWeight)
+    {
+        this.passengerCarMaxWeight = passengerCarMaxWeight;
+    }
+
+    public int getPassengerCarMaxHeight()
+    {
+        return passengerCarMaxHeight;
+    }
+
+    public void setPassengerCarMaxHeight(int passengerCarMaxHeight)
+    {
+        this.passengerCarMaxHeight = passengerCarMaxHeight;
+    }
+
+    public int getControllerMaxHeight()
+    {
+        return controllerMaxHeight;
+    }
+
+    public void setControllerMaxHeight(int controllerMaxHeight)
+    {
+        this.controllerMaxHeight = controllerMaxHeight;
+    }
+    public int getPassengerCarPrice()
+    {
+        return passengerCarPrice;
+    }
+
+    public void setPassengerCarPrice(int passengerCarPrice)
+    {
+        this.passengerCarPrice = passengerCarPrice;
+    }
+    public int getCargoCarPrice()
+    {
+        return cargoCarPrice;
+    }
+
+    public void setCargoCarPrice(int cargoCarPrice)
+    {
+        this.cargoCarPrice = cargoCarPrice;
+    }
+    public int getVehicleAdditionalPrice()
+    {
+        return vehicleAdditionalPrice;
+    }
+
+    public void setVehicleAdditionalPrice(int vehicleAdditionalPrice)
+    {
+        this.vehicleAdditionalPrice = vehicleAdditionalPrice;
+    }
+
+
 }
