@@ -1,11 +1,15 @@
-
 public class Cat
 {
+    public static int catCount;
+
     private double originWeight;
     private double weight;
-    private double food;
+
     private double minWeight;
     private double maxWeight;
+
+    private String name;
+
 
     public Cat()
     {
@@ -16,15 +20,38 @@ public class Cat
 
     }
 
+    public Cat(String name)
+    {
+        this();
+        this.name = name;
+
+        if (weight >= maxWeight)
+            catCount = catCount - 1;
+        else if (weight <= minWeight)
+            catCount = catCount - 1;
+        else catCount = catCount + 1;
+    }
+
+    public String getName()
+    {
+        return name;
+    }
+
+    public int getCount()
+    {
+        return catCount;
+    }
+
+
     public void meow()
     {
         weight = weight - 1;
         System.out.println("Meow");
     }
 
+
     public void feed(Double amount)
     {
-        food = amount;
         weight = weight + amount;
     }
 
@@ -33,20 +60,10 @@ public class Cat
         weight = weight + amount;
     }
 
-    public void pee()
-    {
-        weight = weight * 0.97;
-        System.out.println("Weight: " + getWeight());
-    }
 
     public Double getWeight()
     {
         return weight;
-    }
-
-    public Double getFood()
-    {
-        return food;
     }
 
     public String getStatus()

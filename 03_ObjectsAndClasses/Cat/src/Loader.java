@@ -2,11 +2,10 @@ public class Loader
 {
     public static void main(String[] args)
     {
-        Cat Bobo = new Cat();
-        System.out.println(Bobo.getWeight());
-        Bobo.feed(200.00);
-        System.out.println(Bobo.getWeight());
-        Bobo.pee();
-        System.out.println(Bobo.getFood());
+        Cat vaska = new Cat("Васька");
+        Cat murka = new Cat("Мурка");
+        System.out.println(vaska.getWeight());
+        System.out.println(murka.getWeight());
+        System.out.println(Cat.catCount);
     }
 }
