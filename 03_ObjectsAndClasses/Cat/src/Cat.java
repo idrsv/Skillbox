@@ -7,8 +7,7 @@ public class Cat
     private double minWeight;
     private double maxWeight;
 
-    private double weightCat;
-
+    private String colorOfCat;
 
     public Cat()
     {
@@ -16,14 +15,16 @@ public class Cat
         originWeight = weight;
         minWeight = 1000.0;
         maxWeight = 9000.0;
+
     }
-    public Cat(Double weightCat)
+    public void setColorOfCat(ColorOfCat color)
     {
-        this.weightCat = weightCat;
+        this.colorOfCat = colorOfCat;
     }
-    public Double getWeightCat()
+
+    public String getColorOfCat()
     {
-        return weightCat;
+        return colorOfCat;
     }
 
     public void meow()

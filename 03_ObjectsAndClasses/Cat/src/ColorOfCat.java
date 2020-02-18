@@ -1,4 +1,4 @@
-public enum colorsOfCats
+public enum ColorOfCat
 {
     WIGHT_COLOR,
     BROWN_COLOR,
