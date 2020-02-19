@@ -1,53 +1,63 @@
 
 public class Cat
 {
-    private double originWeight;
-    private double weight;
+    private static final int QUANTITY_OF_EYES = 2;
+    private static final int MIN_WEIGHT = 1500;
+    private static final int MAX_WEIGHT = 15000;
+    public static int catCount;
 
+    private double weight;
+    private double originWeight;
+    private double food;
     private String colorOfCat;
     private String name;
 
-    private double minWeight;
-    private double maxWeight;
 
     public Cat(double weight, String name, String colorOfCat)
     {
         this.weight = weight;
-        originWeight = weight;
-        this.colorOfCat = colorOfCat;
         this.name = name;
+        this.colorOfCat = colorOfCat;
+        originWeight = weight;
+        catCount++;
+
     }
-    private static Cat copyCat(Cat cat)
+
+    public void setColorOfCat(String colorOfCat)
     {
-        Cat newCat = new Cat(cat.getWeight(), cat.getColorOfCat(), cat.getName());
-        return newCat;
-    }
-
-
-    public void setColorOfCat(String colorOfCat) {
         this.colorOfCat = colorOfCat;
     }
 
-    public String getColorOfCat() {
+    public String getColorOfCat()
+    {
         return colorOfCat;
     }
 
-    public void setName(String name) {
+    public void setName(String name)
+    {
         this.name = name;
     }
 
-    public String getName() {
+    public String getName()
+    {
         return name;
     }
 
     public void meow()
     {
-        weight = weight - 1;
-        System.out.println("Meow");
+        weight = weight - 500;
+
+            if (weight >= MAX_WEIGHT || weight <= MIN_WEIGHT)
+
+            catCount--;
+
+            System.out.println("Meow");
+
     }
 
     public void feed(Double amount)
     {
+        food += amount;
         weight = weight + amount;
     }
 
@@ -56,20 +66,41 @@ public class Cat
         weight = weight + amount;
     }
 
+
+    public void pee()
+    {
+        weight = weight * 0.97;
+        if (weight >= MAX_WEIGHT || weight <= MIN_WEIGHT)
+            catCount--;
+        System.out.println("Weight: " + getWeight());
+    }
+
     public Double getWeight()
     {
         return weight;
     }
 
+    public Double getFood()
+    {
+        return food;
+    }
+    public int getCount()
+    {
+        return catCount;
+    }
+
     public String getStatus()
     {
-        if(weight < minWeight) {
+        if(weight < MIN_WEIGHT)
+        {
             return "Dead";
         }
-        else if(weight > maxWeight) {
+        else if(weight > MAX_WEIGHT)
+        {
             return "Exploded";
         }
-        else if(weight > originWeight) {
+        else if(weight > originWeight)
+        {
             return "Sleeping";
         }
         else {
