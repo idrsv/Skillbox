@@ -10,9 +10,11 @@ public class Main
         System.out.println(Short.MIN_VALUE);
         System.out.println(Long.MAX_VALUE);
         System.out.println(Long.MIN_VALUE);
+
         System.out.println(Float.MAX_VALUE);
-        System.out.println(Float.MIN_VALUE);
+        System.out.println(-Float.MAX_VALUE);
+
         System.out.println(Double.MAX_VALUE);
-        System.out.println(Double.MIN_VALUE);
+        System.out.println(-Double.MAX_VALUE);
     }
 }
