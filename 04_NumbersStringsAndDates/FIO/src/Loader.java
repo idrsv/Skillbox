@@ -9,17 +9,17 @@ public class Loader {
         int firstIndex = fullName.indexOf(' ');
         int lastIndex = fullName.lastIndexOf(' ');
         int space = 0;
+        int fullName2 = 0;
 
-        boolean fullName2 = true;
         for (int i = 0; i < fullName.length(); i++) {
             if (Character.isWhitespace(fullName.charAt(i))) {
                 space++;
             }
-            if ((fullName.charAt(i) >= '0' && fullName.charAt(i) <= '9') || (space < 2 | space > 2)) {
-                fullName2 = false;
+            if ((fullName.charAt(i) >= '0' && fullName.charAt(i) <= '9')) {
+                fullName2 = 1;
             }
         }
-        if (fullName2 == false) {
+        if (fullName2 == 1 || space != 2) {
             System.out.println("Вы допустили ошибку при вводе данных");
         }
             else {
@@ -30,5 +30,5 @@ public class Loader {
                 System.out.println("Имя: " + lastName);
                 System.out.println("Отчество: " + middleName);
             }
-    }
+     }
 }
