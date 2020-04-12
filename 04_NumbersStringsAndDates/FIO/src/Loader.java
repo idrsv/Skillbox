@@ -5,9 +5,6 @@ public class Loader {
         System.out.println("Введите: Фамилию Имя Отчество");
         Scanner scanner = new Scanner(System.in);
         String fullName = scanner.nextLine();
-
-        int firstIndex = fullName.indexOf(' ');
-        int lastIndex = fullName.lastIndexOf(' ');
         int space = 0;
         int fullName2 = 0;
 
@@ -23,12 +20,10 @@ public class Loader {
             System.out.println("Вы допустили ошибку при вводе данных");
         }
             else {
-                String firstName = fullName.substring(0, firstIndex);
-                String lastName = fullName.substring(firstIndex + 1, lastIndex);
-                String middleName = fullName.substring(lastIndex + 1);
-                System.out.println("Фамилия: " + firstName);
-                System.out.println("Имя: " + lastName);
-                System.out.println("Отчество: " + middleName);
+                String[] sentences = fullName.split("\\s");
+                System.out.println("Фамилия: " + sentences[0]);
+                System.out.println("Имя: " + sentences[1]);
+                System.out.println("Отчество: " + sentences[2]);
             }
-     }
+    }
 }
