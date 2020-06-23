@@ -1,29 +1,19 @@
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Loader
 {
-    public static void main(String[] args)
-//    {
-//        String text = "Вася заработал 5000 рублей, Петя - 7563 рубля, а Маша - 30000 рублей";
-//        System.out.println(text);
-//
-//        Integer vasyaSum = Integer.parseInt(text.substring(15, text.indexOf("руб")).trim());
-//        Integer mashaSum = Integer.parseInt(text.substring(text.indexOf("Маша - ") + 6, text.lastIndexOf("руб")).trim());
-//
-//        int sum = vasyaSum + mashaSum;
-//        System.out.println(sum);
-//    }
-    {
-        String text2 = "Вася заработал 5000 рублей, Петя - 7563 рубля, а Маша - 30000 рублей , Катя - 200000 рублей";
-        System.out.println(text2);
-
-        String[] sentences =  text2.split(",\\s");
+    public static void main(String[] args) {
+        final String regex = "([0-9]+)";
+        final String text = "Вася заработал 99999000 рублей, Петя - 7563 рубля, а Маша - 30000 рублей , Катя - 200000 рублей";
         int sum = 0;
+        
+        final Pattern pattern = Pattern.compile(regex);
+        final Matcher matcher = pattern.matcher(text);
 
-        for(int i = 0; i < sentences.length; i++)
-        {
-            sum += Integer.parseInt((sentences[i].replaceAll("[^0-9]","")).trim());
+        while (matcher.find()) {
+            sum += Integer.parseInt(matcher.group()) ;
         }
-        {
-            System.out.println("Вместе они все заработали: " + sum);
-        }
+        System.out.println(sum);
     }
 }
