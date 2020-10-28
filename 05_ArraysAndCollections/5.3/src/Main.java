@@ -1,39 +1,38 @@
 import java.util.Scanner;
 import java.util.TreeSet;
-//sdsd
+
 public class Main {
-    public static void main(String args[]) {
-        TreeSet<String> emails = new TreeSet<>();
-        emails.add("idrisovds@gmail.com");
-        emails.add("savchinvm@gmail.com");
-        emails.add("bogatirevmn@gmail.com");
-        System.out.println("\n-------------------------------- \nВведите команду: \nADD \nLIST \n--------------------------------");
+    public static void main(String[] args) {
+
         while (true) {
+            EmailList emailList = new EmailList();
+            emailList.add("idrisovds@gmail.com");
+            emailList.add("savchinvm@gmail.com");
+            emailList.add("bogatirevmn@gmail.com");
+
             Scanner scanner = new Scanner(System.in);
+
             String input = scanner.nextLine() + " ";
 
             String command = input.substring(0, input.indexOf(" ")).toUpperCase().trim();
-            String description = input.substring(command.length()).trim();
-            String address = description.replaceAll("(\\w+)(@[a-zA-Z_]+)([.][a-zA-z]{2,6})", "");
 
-            switch (command) {
-                case "ADD":
-                    if (address.equals("")) {
-                        emails.add(description);
-                    }
-                    else {
-                        System.out.println("Неправильно введен адрес электронной почты");
-                    }
-                    break;
-                case "LIST":
-                    System.out.println("Список адресов электронной почты: ");
-                    for (String email: emails) {
-                        System.out.println(email);
-                    }
-                    break;
-            }
+            if (command.startsWith("LIST")) {
+                emailList.list();}
+            else {
+                String email = command.substring(input.indexOf(" "));
+                emailList.add(email);}
         }
     }
 }
+class EmailList {
+    TreeSet<String> emailList = new TreeSet<>();
 
-
+    public void list() {
+        System.out.println("Список адресов электронной почты: ");
+        for (String email : emailList) {
+            System.out.println(email); }
+    }
+    public void add(String email) {
+        emailList.add(email);
+    }
+}
