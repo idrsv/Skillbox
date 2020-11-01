@@ -22,7 +22,17 @@ public class Main {
                         System.out.println("По номеру " + subscribersPhoneNumber + " зарегистрирован абонент - " + entry.getKey());
                     }
                 }
-            } else phoneBook.put(subscribersName, subscribersPhoneNumber);
+            } else if (subscribersPhoneNumber.isEmpty()){
+                System.out.println("Введите номер абонента: ");
+                String phone = scanner.nextLine();
+                phoneBook.put(subscribersName,phone);
+            }
+            else if (subscribersName.isEmpty()){
+                System.out.println("Вы не ввели имя абонента: ");
+                String name = scanner.nextLine();
+                phoneBook.put(name, subscribersPhoneNumber);
+            }
+            else phoneBook.put(subscribersName, subscribersPhoneNumber);
         }
     }
 
