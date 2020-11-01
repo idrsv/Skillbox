@@ -12,26 +12,40 @@ public class Main {
 
             if (nameOrNumber.equals("LIST")) {
                 printPhoneBook(phoneBook);
-                continue;
-            }
+                continue; }
             if (phoneBook.containsKey(subscribersName)) {
-                System.out.println("Абонент - " + subscribersName + " с номером " + phoneBook.get(subscribersName));
+                System.out.println("Хотите перезаписать номер абонента? : 1 - yes, 2 - no ");
+                Scanner scanner2 = new Scanner(System.in);
+                String input2 = scanner2.nextLine();
+                if (input2.startsWith("1")){
+                    System.out.println("Введите номер абонента: ");
+                    String phone = scanner.nextLine();
+                    phoneBook.put(subscribersName,phone); }
+                   else if (input2.startsWith("2")) {
+                    System.out.println("Абонент - " + subscribersName + " с номером " + phoneBook.get(subscribersName) + " добавлен в телефонную книгу"); }
             } else if (phoneBook.containsValue(subscribersPhoneNumber)) {
-                for (Map.Entry<String, String> entry : phoneBook.entrySet()){
-                    if (entry.getValue().equals(subscribersPhoneNumber)){
-                        System.out.println("По номеру " + subscribersPhoneNumber + " зарегистрирован абонент - " + entry.getKey());
+                System.out.println("Хотите перезаписать имя абонента? : 1 - yes, 2 - no ");
+                Scanner scanner3 = new Scanner(System.in);
+                String input3 = scanner3.nextLine();
+                if (input3.startsWith("1")){
+                    System.out.println("Введите имя абонента: ");
+                    String name = scanner.nextLine();
+                    phoneBook.put(subscribersName,name);
+                }
+                else if (input3.startsWith("2")) {
+                    for (Map.Entry<String, String> entry : phoneBook.entrySet()){
+                        if (entry.getValue().equals(subscribersPhoneNumber)){
+                            System.out.println("По номеру " + subscribersPhoneNumber + " зарегистрирован абонент - " + entry.getKey()); }
                     }
                 }
             } else if (subscribersPhoneNumber.isEmpty()){
                 System.out.println("Введите номер абонента: ");
                 String phone = scanner.nextLine();
-                phoneBook.put(subscribersName,phone);
-            }
+                phoneBook.put(subscribersName,phone); }
             else if (subscribersName.isEmpty()){
                 System.out.println("Вы не ввели имя абонента: ");
                 String name = scanner.nextLine();
-                phoneBook.put(name, subscribersPhoneNumber);
-            }
+                phoneBook.put(name, subscribersPhoneNumber);}
             else phoneBook.put(subscribersName, subscribersPhoneNumber);
         }
     }
