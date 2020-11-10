@@ -12,7 +12,7 @@ public class Main {
 
         String[] licensePlateLetters = {"A", "B", "C", "E", "H", "K", "M", "O", "P", "T", "X", "Y"};
         StringBuilder str = new StringBuilder("");
-        for (; ; ) {
+
             for (int i = 0; i < licensePlateLetters.length; i++) {
                 for (int licensePlateNumbers = 111; licensePlateNumbers <= 999; licensePlateNumbers += 111) {
                     for (int j = 0; j < licensePlateLetters.length; j++) {
@@ -28,13 +28,13 @@ public class Main {
             }
             hashSet.addAll(list);
             treeSet.addAll(list);
+            list.sort(Collections.reverseOrder());
 
             long start1 = System.nanoTime();
             list.contains(input);
             long duration1 = System.nanoTime() - start1;
             System.out.println("Время поиска по прямому перебору составляет: " + duration1);
             long start2 = System.nanoTime();
-            list.sort(Collections.reverseOrder());
             int index = Collections.binarySearch(list, input, Collections.reverseOrder());
             long duration2 = System.nanoTime() - start2;
             System.out.println("Время по бинарному поиску составляет: " + duration2);
@@ -46,7 +46,6 @@ public class Main {
             hashSet.contains(input);
             long duration4 = System.nanoTime() - start4;
             System.out.println("Время поиска по HashSet составляет: " + duration4);
-        }
     }
 }
 
