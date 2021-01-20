@@ -1,16 +1,21 @@
 public class Manager implements Employee{
-    private Company company;
-    private int salary;
-    private int min = 115000;
-    private int max = 140000;
+    Company company;
+    private final int salary;
 
     public Manager(int salary){
-        this.salary = salary;
+        int min = 115000;
+        int max = 140000;
+        int percent = (int) (0.05 * (int) (Math.random() * (max - min) + min));
+        this.salary = salary + percent;
     }
 
     @Override
     public int getMonthSalary() {
-        int percent = (int) (0.05 * (int) (Math.random() * (max - min) + min));
-        return (salary + percent);
+        return salary;
+    }
+
+    @Override
+    public void setCompany(Company company) {
+        this.company = company;
     }
 }

@@ -1,7 +1,17 @@
 import java.util.*;
 
 public class Company {
-    public  List<Employee> employeeList = new ArrayList<>();
+
+    public static int income;
+
+    public void setIncome(int income){
+        Company.income = income;
+    }
+    public static int getIncome(){
+        return income;
+    }
+
+    private final List<Employee> employeeList = new ArrayList<>();
 
     private List<Employee> getSortedEmployeeList(int count, Comparator<Employee> comparator ) {
         List<Employee> copyEmployeeList = new ArrayList<>(employeeList);
@@ -22,19 +32,17 @@ public class Company {
     }
 
     public void hire(Employee employee) {
+        employee.setCompany(this);
         this.employeeList.add(employee);
     }
 
     public void fire(Employee employee) {
+        employee.setCompany(this);
         this.employeeList.remove(employee);
     }
 
-    public void hireAll(Collection<Employee> employees){
-        this.employeeList.addAll(employees);
-    }
-
-    public static int getIncome(){
-        return 20000000;
+    public void hireAll(Collection<Employee> employee){
+        this.employeeList.addAll(employee);
     }
 
     public int countEmployee(){

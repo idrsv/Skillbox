@@ -1,6 +1,6 @@
 public class TopManager implements Employee{
-    private Company company;
-    private int salary;
+    Company company;
+    private final int salary;
 
     public TopManager(int salary){
         this.salary = salary;
@@ -12,5 +12,10 @@ public class TopManager implements Employee{
             return (int) (2.5 * salary);
         }
         return salary;
+    }
+
+    @Override
+    public void setCompany(Company company) {
+        this.company = company;
     }
 }

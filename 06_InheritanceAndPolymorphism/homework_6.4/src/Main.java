@@ -1,6 +1,7 @@
 public class Main {
     public static void main(String[] args) {
         Company company = new Company();
+        company.setIncome(2000000);
         hireEmployees(company);
         System.out.println("Создаем и нанимаем сотрудников: " + company.countEmployee());
         System.out.println("Список из 15 самых высоких зарплат в компании: ");

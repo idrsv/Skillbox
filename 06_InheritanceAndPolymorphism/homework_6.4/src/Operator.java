@@ -1,5 +1,6 @@
 public class Operator implements Employee{
-    private int salary;
+    private final int salary;
+    Company company;
 
     public Operator(int salary){
         this.salary = salary;
@@ -8,5 +9,10 @@ public class Operator implements Employee{
     @Override
     public int getMonthSalary() {
         return salary;
+    }
+
+    @Override
+    public void setCompany(Company company) {
+        this.company = company;
     }
 }
