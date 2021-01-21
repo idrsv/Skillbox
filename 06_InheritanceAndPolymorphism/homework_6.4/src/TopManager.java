@@ -8,7 +8,7 @@ public class TopManager implements Employee{
 
     @Override
     public int getMonthSalary() {
-        if (Company.getIncome() > 10000000){
+        if (company.getIncome() > 10000000){
             return (int) (2.5 * salary);
         }
         return salary;

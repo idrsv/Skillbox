@@ -1,6 +1,6 @@
 public class Operator implements Employee{
-    private final int salary;
     Company company;
+    private final int salary;
 
     public Operator(int salary){
         this.salary = salary;

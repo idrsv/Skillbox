@@ -1,13 +1,14 @@
 import java.util.*;
 
 public class Company {
-
-    public static int income;
+    public int income;
+    Company company;
 
     public void setIncome(int income){
-        Company.income = income;
+        company.income = income;
     }
-    public static int getIncome(){
+
+    public int getIncome(){
         return income;
     }
 
