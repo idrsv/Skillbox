@@ -1,3 +1,4 @@
+import java.util.Comparator;
 import java.util.List;
 
 public class Main {
@@ -11,10 +12,12 @@ public class Main {
     }
 
     public static void sortBySalaryAndAlphabet(List<Employee> staff) {
-        //TODO Метод должен отсортировать сотрудников по заработной плате и алфавиту.
-        staff.sort((o1, o2) -> {
-            int i = o1.getSalary().compareTo(o2.getSalary());
-            return i != 0 ? i : o1.getName().compareTo(o2.getName());
-        });
+        Comparator<Employee> employeeSalaryAndAlphabetComparator = Comparator.comparingInt(Employee::getSalary).thenComparing(Employee::getName);
+        staff.sort(employeeSalaryAndAlphabetComparator);
+
+//        staff.sort((o1, o2) -> {
+//            int i = o1.getSalary().compareTo(o2.getSalary());
+//            return i != 0 ? i : o1.getName().compareTo(o2.getName());
+//        });
     }
 }

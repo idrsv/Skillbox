@@ -38,7 +38,6 @@ public class Company {
     }
 
     public void fire(Employee employee) {
-        employee.setCompany(this);
         this.employeeList.remove(employee);
     }
 
