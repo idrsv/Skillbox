@@ -1,4 +1,7 @@
+import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 public class Main {
 
@@ -10,9 +13,10 @@ public class Main {
         System.out.println(employeeMaxSalary);
     }
 
-    public static Employee findEmployeeWithHighestSalary(List<Employee> staff, int year) {
+    public static Employee findEmployeeWithHighestSalary(List<Employee> staff,int year) {
         //TODO Метод должен вернуть сотрудника с максимальной зарплатой среди тех,
         // кто пришёл в году, указанном в переменной year
-        return null;
+        Optional<Employee> sort = staff.stream().filter(e -> e.getWorkStart().getYear() + 1900 == year ).max(Comparator.comparing(Employee::getSalary));
+        return sort.get();
     }
 }
