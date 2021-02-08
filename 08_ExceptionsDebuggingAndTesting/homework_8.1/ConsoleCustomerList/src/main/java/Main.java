@@ -31,7 +31,7 @@ public class Main {
                     System.out.println(COMMAND_ERROR);
                 }
             }
-            catch (IllegalArgumentException ex){
+            catch (Throwable ex){
                 System.out.println(ex.getMessage());
             }
         }
