@@ -1,5 +1,7 @@
 import core.Line;
 import core.Station;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -11,6 +13,10 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Main {
+    private static final Logger loggerSearch = LogManager.getLogger("Search");
+    private static final Logger loggerException = LogManager.getLogger("Exception");
+    private static final Logger loggerErrors = LogManager.getLogger("Errors");
+
     private static final String DATA_FILE = "src/main/resources/map.json";
     private static Scanner scanner;
 
@@ -18,12 +24,12 @@ public class Main {
 
     public static void main(String[] args) {
         RouteCalculator calculator = getRouteCalculator();
-
         System.out.println("Программа расчёта маршрутов метрополитена Санкт-Петербурга\n");
         scanner = new Scanner(System.in);
         for (; ; ) {
             Station from = takeStation("Введите станцию отправления:");
             Station to = takeStation("Введите станцию назначения:");
+            loggerSearch.info("Станциии которые ищут: " + from + "," + to);
 
             List<Station> route = calculator.getShortestRoute(from, to);
             System.out.println("Маршрут:");
@@ -63,6 +69,7 @@ public class Main {
             if (station != null) {
                 return station;
             }
+            loggerErrors.error("Станция не найдена: " + line);
             System.out.println("Станция не найдена :(");
         }
     }
@@ -82,6 +89,7 @@ public class Main {
             JSONArray connectionsArray = (JSONArray) jsonData.get("connections");
             parseConnections(connectionsArray);
         } catch (Exception ex) {
+            loggerException.debug("Ошибка парсинга JSON-файла " + ex);
             ex.printStackTrace();
         }
     }
