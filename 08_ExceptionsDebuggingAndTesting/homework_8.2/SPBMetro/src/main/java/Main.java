@@ -13,9 +13,9 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Main {
-    private static final Logger loggerSearch = LogManager.getLogger("Search");
-    private static final Logger loggerException = LogManager.getLogger("Exception");
-    private static final Logger loggerErrors = LogManager.getLogger("Errors");
+    private static final Logger loggerSearch = LogManager.getLogger();
+    private static final Logger loggerException = LogManager.getLogger();
+    private static final Logger loggerErrors = LogManager.getLogger();
 
     private static final String DATA_FILE = "src/main/resources/map.json";
     private static Scanner scanner;
@@ -69,7 +69,7 @@ public class Main {
             if (station != null) {
                 return station;
             }
-            loggerErrors.error("Станция не найдена: " + line);
+            loggerErrors.warn("Станция не найдена: " + line);
             System.out.println("Станция не найдена :(");
         }
     }
@@ -89,7 +89,7 @@ public class Main {
             JSONArray connectionsArray = (JSONArray) jsonData.get("connections");
             parseConnections(connectionsArray);
         } catch (Exception ex) {
-            loggerException.debug("Ошибка парсинга JSON-файла " + ex);
+            loggerException.error("Ошибка парсинга JSON-файла " + ex);
             ex.printStackTrace();
         }
     }
