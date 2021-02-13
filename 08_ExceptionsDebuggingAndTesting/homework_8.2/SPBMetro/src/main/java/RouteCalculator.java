@@ -22,11 +22,12 @@ public class RouteCalculator {
         }
 
         route = getRouteWithOneConnection(from, to);
-        if (route != null) {
-            return route;
+        if (route == null) {
+            return null;
         }
 
         route = getRouteWithTwoConnections(from, to);
+
         return route;
     }
 

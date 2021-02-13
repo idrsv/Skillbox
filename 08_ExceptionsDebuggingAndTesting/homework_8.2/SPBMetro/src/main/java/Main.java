@@ -13,9 +13,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Main {
-    private static final Logger loggerSearch = LogManager.getLogger();
-    private static final Logger loggerException = LogManager.getLogger();
-    private static final Logger loggerErrors = LogManager.getLogger();
+    private static final Logger logger = LogManager.getLogger(Main.class);
 
     private static final String DATA_FILE = "src/main/resources/map.json";
     private static Scanner scanner;
@@ -29,7 +27,7 @@ public class Main {
         for (; ; ) {
             Station from = takeStation("Введите станцию отправления:");
             Station to = takeStation("Введите станцию назначения:");
-            loggerSearch.info("Станциии которые ищут: " + from + "," + to);
+            logger.info("Станциии которые ищут: " + from + "," + to);
 
             List<Station> route = calculator.getShortestRoute(from, to);
             System.out.println("Маршрут:");
@@ -69,7 +67,7 @@ public class Main {
             if (station != null) {
                 return station;
             }
-            loggerErrors.warn("Станция не найдена: " + line);
+            logger.warn("Станция не найдена: " + line);
             System.out.println("Станция не найдена :(");
         }
     }
@@ -89,7 +87,7 @@ public class Main {
             JSONArray connectionsArray = (JSONArray) jsonData.get("connections");
             parseConnections(connectionsArray);
         } catch (Exception ex) {
-            loggerException.error("Ошибка парсинга JSON-файла " + ex);
+            logger.error("Ошибка парсинга JSON-файла " + ex);
             ex.printStackTrace();
         }
     }
