@@ -1,11 +1,15 @@
 import core.Line;
 import core.Station;
-import junit.framework.TestCase;
+import org.junit.*;
+import org.junit.jupiter.api.DisplayName;
+
+import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class RouteCalculatorTest extends TestCase {
+@DisplayName("RouteCalculatorTest")
+public class RouteCalculatorTest {
     /**
      *
      *                                 line 2
@@ -32,7 +36,8 @@ public class RouteCalculatorTest extends TestCase {
     Line line1, line2, line3;
     Station st1, st2, st3, st4, st5, st6, st7, st8, st9, st10;
 
-    protected void setUp() throws Exception {
+    @Before
+    public void setUp() throws Exception {
         route = new ArrayList<>();
         stationIndex = new StationIndex();
         routeWithOneConnection = new ArrayList<>();
@@ -89,21 +94,37 @@ public class RouteCalculatorTest extends TestCase {
         routeWithTwoConnection.add(st10);
     }
 
+    @Test
+    @DisplayName("Продолжительность маршрута")
     public void testCalculatorDuration(){
         // 2.5 + 2.5 + 3.5 + 2.5 + 2.5 + 3.5 + 2.5 = 2.5 * 5 + 3.5 * 2 = 15 + 7 = 19.5;
         double actual = RouteCalculator.calculateDuration(routeWithTwoConnection);
         double expected = 19.5;
+        double delta = 0.0;
+        assertEquals(expected,actual,delta);
+    }
+
+    @Test
+    @DisplayName("Кратчайший маршрут, когда станции на одной линии")
+    public void shouldReturnShortestRouteWhenStationsOnOneLine() {
+        int actual = routeCalculator.getShortestRoute(stationIndex.getStation("Первая станция"),stationIndex.getStation("Третья станция")).size();
+        int expected = 3;
         assertEquals(expected,actual);
     }
 
-    public void testGetRouteOnTheLine3(){
-        int actual = routeCalculator.getShortestRoute(stationIndex.getStation("Первая станция"),stationIndex.getStation("Пятая станция")).size();
-        int expected = 0;
+    @Test
+    @DisplayName("Кратчайший маршрут, с одной пересадкой")
+    public void shouldReturnShortestRouteWithOneConnect() {
+        int actual = routeCalculator.getShortestRoute(stationIndex.getStation("Первая станция"),stationIndex.getStation("Четвертая станция")).size();
+        int expected = 4;
         assertEquals(expected,actual);
     }
 
-    @Override
-    protected void tearDown() throws Exception {
-        super.tearDown();
+    @Test
+    @DisplayName("Кратчайший маршрут, с двумя пересадками")
+    public void shouldReturnShortestRouteWithTwoConnect() {
+        int actual = routeCalculator.getShortestRoute(stationIndex.getStation("Первая станция"),stationIndex.getStation("Восьмая станция")).size();
+        int expected = 8;
+        assertEquals(expected,actual);
     }
 }
