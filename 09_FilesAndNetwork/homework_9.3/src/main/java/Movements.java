@@ -2,18 +2,24 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.DoubleStream;
 
 public class Movements {
-    public static List<Double> movementIncome;
-    public static List<Double> movementExpense;
+    public static List<Transaction> transactionList;
+    private static final int INCOME = 6;
+    private static final int EXPENSE = 7;
+    private static final int DESCRIPTION = 5;
 
     public Movements(String pathMovementsCsv) {
-        Movements.getIncome(pathMovementsCsv);
-        Movements.getExpense(pathMovementsCsv);
+        loadFromFileCSV(pathMovementsCsv);
+        Map<String, Map<Double, List<Transaction>>> collect = transactionList.stream().collect(Collectors.groupingBy(Transaction::getDescription, Collectors.groupingBy(Transaction::getExpense)));
+        System.out.println(collect);
     }
 
-    private static List<Double> getExpense(String pathMovementsCsv){
-        movementExpense = new ArrayList<>();
+    private static List<Transaction> loadFromFileCSV(String pathMovementsCsv){
+        transactionList = new ArrayList<>();
         try{
             List<String> lines = Files.readAllLines(Paths.get(pathMovementsCsv));
             for (String line : lines) {
@@ -23,48 +29,23 @@ public class Movements {
                     continue;
                 }
                 if (!line.startsWith("Тип")){
-                    movementExpense.add(Double.parseDouble(fragments[7].replace(",",".").replace("\"","")));
+                    transactionList.add(new Transaction(
+                            Double.parseDouble(fragments[INCOME].replace(",",".").replace("\"","")),
+                            Double.parseDouble(fragments[EXPENSE].replace(",",".").replace("\"","")),
+                            fragments[DESCRIPTION].substring(16,68)));
                 }
             }
         }catch (Exception ex){
             ex.printStackTrace();
         }
-        return movementExpense;
-    }
-
-    private static List<Double> getIncome(String pathMovementsCsv){
-        movementIncome = new ArrayList<>();
-        try{
-            List<String> lines = Files.readAllLines(Paths.get(pathMovementsCsv));
-            for (String line : lines) {
-                String[] fragments = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
-                if (fragments.length != 8) {
-                    System.out.println("Wrong line: " + line);
-                    continue;
-                }
-                if (!line.startsWith("Тип")) {
-                    movementIncome.add(Double.parseDouble(fragments[6].replace(",", ".").replace("\"", "")));
-                }
-            }
-        }catch (Exception ex){
-            ex.printStackTrace();
-        }
-        return movementIncome;
+        return transactionList;
     }
 
     public double getExpenseSum() {
-        double expenseSum = 0.0;
-        for (Double aDouble : movementExpense) {
-            expenseSum += aDouble;
-        }
-        return expenseSum;
+        return transactionList.stream().flatMapToDouble(tr -> DoubleStream.of(tr.getExpense())).sum();
     }
 
     public double getIncomeSum() {
-        double incomeSum = 0.0;
-        for (Double aDouble : movementIncome){
-            incomeSum += aDouble;
-        }
-        return incomeSum;
+        return transactionList.stream().flatMapToDouble(tr -> DoubleStream.of(tr.getIncome())).sum();
     }
 }
