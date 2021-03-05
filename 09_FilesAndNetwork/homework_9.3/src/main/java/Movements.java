@@ -1,8 +1,6 @@
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.DoubleStream;
 
@@ -14,8 +12,10 @@ public class Movements {
 
     public Movements(String pathMovementsCsv) {
         loadFromFileCSV(pathMovementsCsv);
-        Map<String, Map<Double, List<Transaction>>> collect = transactionList.stream().collect(Collectors.groupingBy(Transaction::getDescription, Collectors.groupingBy(Transaction::getExpense)));
-        System.out.println(collect);
+        Map<String, Double> collect = transactionList.stream().collect(Collectors.groupingBy(Transaction::getDescription, Collectors.summingDouble(Transaction::getExpense)));
+        for(Map.Entry<String, Double> item: collect.entrySet()){
+            System.out.println(item.getKey() + " - " + item.getValue());
+        }
     }
 
     private static List<Transaction> loadFromFileCSV(String pathMovementsCsv){
@@ -33,6 +33,7 @@ public class Movements {
                             Double.parseDouble(fragments[INCOME].replace(",",".").replace("\"","")),
                             Double.parseDouble(fragments[EXPENSE].replace(",",".").replace("\"","")),
                             fragments[DESCRIPTION].substring(16,68)));
+
                 }
             }
         }catch (Exception ex){
