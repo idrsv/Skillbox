@@ -20,19 +20,13 @@ public class Main {
         }
     }
 
-    private static void getImages(String src) {
-        try {
-            String name = src.substring(src.lastIndexOf("/"));
+    private static void getImages(String src) throws IOException {
+        try (OutputStream outputStream = new BufferedOutputStream(new FileOutputStream(destinationDirectory + src.substring(src.lastIndexOf("/"))))) {
             URL url = new URL(src);
             InputStream inputStream = url.openStream();
-            OutputStream outputStream = new BufferedOutputStream(new FileOutputStream( destinationDirectory + name));
-            for (int i; (i = inputStream.read()) != -1;) {
-                outputStream.write(i); }
-            outputStream.close();
-            inputStream.close();
-        } catch (Exception ex){
-            ex.printStackTrace();
+            for (int i; (i = inputStream.read()) != -1; ) {
+                outputStream.write(i);
+            }
         }
-
     }
 }
