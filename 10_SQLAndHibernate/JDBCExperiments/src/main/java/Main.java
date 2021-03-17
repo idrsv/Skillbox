@@ -1,22 +1,17 @@
 import java.sql.*;
 
 public class Main {
+    private static final String REQUEST = "select course_name, COUNT(subscription_date)/(MAX(MONTH(subscription_date)) - MIN(MONTH(subscription_date))) AS count FROM purchaselist group by course_name;";
     public static void main(String[] args) {
-        String url = "jdbc:mysql://localhost:3306/skillbox";
-        String user = "root";
-        String password = "root";
-        try {
-            Connection connection = DriverManager.getConnection(url, user, password);
+
+        try(var connection = ConnectionManager.open();
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("select course_name, COUNT(subscription_date)/(MAX(MONTH(subscription_date))) AS count FROM purchaselist group by course_name;");
+            ResultSet resultSet = statement.executeQuery(REQUEST)) {
             while(resultSet.next()){
                 String courseName = resultSet.getString("course_name");
                 double count = resultSet.getDouble("count");
                 System.out.println(courseName + '\n' + count);
             }
-            connection.close();
-            resultSet.close();
-            statement.cancel();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
