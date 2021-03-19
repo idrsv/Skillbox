@@ -1,5 +1,7 @@
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import core.Line;
 import core.Metro;
 import core.Station;
@@ -8,8 +10,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -37,14 +38,25 @@ public class Main {
                     if (!listOfStations.containsKey(el.attr("data-line"))) {
                         listOfStations.put((el.attr("data-line")), new ArrayList<>());
                     }
-
                     listOfStations.get(el.attr("data-line")).add(new Station(element.getElementsByClass("name").text()));
                 });
             });
+            System.out.println(listOfStations);
             Metro metro = new Metro(listOfLines, listOfStations);
             ObjectMapper mapper = new ObjectMapper();
+
             mapper.enable(SerializationFeature.INDENT_OUTPUT);
             mapper.writeValue(new File(PATH), metro);
+
+            BufferedReader bf = new BufferedReader(new FileReader(PATH));
+            ObjectNode root = (ObjectNode)new ObjectMapper().readTree(bf);
+            int count = 0;
+            for (Iterator<JsonNode> i = root.get("stations").iterator(); i.hasNext();){
+                if( i.next().hasNonNull(""))
+                count++;
+            }
+            System.out.println(count);
+
         } catch (IOException e) {
             e.printStackTrace();
         }

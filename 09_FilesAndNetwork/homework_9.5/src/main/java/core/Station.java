@@ -1,24 +1,14 @@
 package core;
 
-public class Station {
-//    private String lineID;
-    private String nameStation;
+import com.fasterxml.jackson.annotation.JsonValue;
 
-//    public Station(String lineID, String nameStation) {
-//        this.lineID = lineID;
-//        this.nameStation = nameStation;
-//    }
+public class Station {
+    @JsonValue
+    private String nameStation;
 
     public Station(String nameStation) {
         this.nameStation = nameStation;
     }
-    //    public String getLineID() {
-//        return lineID;
-//    }
-//
-//    public void setLineID(String lineID) {
-//        this.lineID = lineID;
-//    }
 
     public String getNameStation() {
         return nameStation;
@@ -26,5 +16,10 @@ public class Station {
 
     public void setNameStation(String nameStation) {
         this.nameStation = nameStation;
+    }
+
+    @Override
+    public String toString() {
+        return nameStation;
     }
 }
