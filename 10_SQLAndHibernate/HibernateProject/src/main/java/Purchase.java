@@ -2,18 +2,18 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.util.Date;
-@Entity
-@Table(name = "PurchaseList")
+//@Entity
+//@Table(name = "PurchaseList")
 public class Purchase {
-    @Column(name = "student_name")
+//    @Column(name = "student_name")
     private String studentName;
 
-    @Column(name = "course_name")
+//    @Column(name = "course_name")
     private String courseName;
 
     private int prise;
 
-    @Column(name = "subscription_date")
+//    @Column(name = "subscription_date")
     private Date subscriptionDate;
 
     public String getStudentName() {
